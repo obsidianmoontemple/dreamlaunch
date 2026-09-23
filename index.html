@@ -32,6 +32,7 @@
   /* ---------- hero ---------- */
   #sky{position:fixed;inset:0;z-index:0;opacity:.55}
   header{position:relative;z-index:1;padding:clamp(60px,12vh,130px) 0 60px;text-align:center}
+  header img.brand-logo{max-width:160px;height:auto;margin:0 auto 20px auto;display:block;}
   header h1{font-size:clamp(38px,7vw,74px);line-height:1.02;margin:22px 0 0}
   header h1 em{font-style:normal;color:var(--gold)}
   .sub{font-size:clamp(18px,2.4vw,23px);color:#CDC8BD;max-width:680px;margin:24px auto 0}
@@ -111,6 +112,8 @@
 
 <div class="wrap">
   <header>
+    <!-- Logo inserted dynamically via script config below -->
+    <img id="brandLogo" class="brand-logo" alt="Somnarch Logo" style="display:none;" />
     <div class="kicker">From the Temple of the Obsidian Moon</div>
     <h1>Write down the dream.<br><em>Then walk into it.</em></h1>
     <p class="sub"><b>Somnarch</b> turns your dream journal into a place you can walk through &mdash; built from your own words, growing every night you write.</p>
@@ -285,11 +288,23 @@
 <div id="bar"><span>$29.99 for life &mdash; be there when it opens</span><button type="button" id="barBtn">Join the list</button></div>
 
 <script>
+/* ------------------------------------------------------------------
+   SETTINGS: Put your logo URL and other links here.
+  ------------------------------------------------------------------ */
+var LOGO_URL     = ""; /* <-- Paste your logo image URL inside these quotes */
 var SUPABASE_URL = "https://ryxmrkwgdyphcdlglwka.supabase.co";
 var SUPABASE_KEY = "sb_publishable_rsf04iH4Pph9ZfLt8g6Ovg_EI_Zk9GY";
 var VIDEO        = "https://video.wixstatic.com/video/d6c75e_9b1a8be2066a4b76b8f502e6df29ed36/1080p/mp4/file.mp4";
 var DEMO         = "https://obsidianmoontemple.github.io/dreamscape/";
 var COUNT_FROM   = 0;
+
+/* ---- logo binder ---- */
+(function(){
+  if(LOGO_URL){
+    var logoEl = document.getElementById("brandLogo");
+    if(logoEl){ logoEl.src = LOGO_URL; logoEl.style.display = "block"; }
+  }
+})();
 
 function validEmail(v){ return /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(String(v||"").trim()); }
 function sourceOf(search,ref){
